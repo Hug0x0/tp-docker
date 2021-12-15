@@ -18,9 +18,12 @@ docker ps
 
 docker network create -d bridge --subnet=172.2.2.0/24 BCNetwork
 
+docker volume create bc
 
 git clone https://github.com/ethereum/go-ethereum.git
 
 docker images
 
 docker build ./go-ethereum
+
+docker run -d -it --network BCNetwork --mount source=bc,destination=/bc --name geth geth

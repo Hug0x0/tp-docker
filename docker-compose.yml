@@ -1,13 +1,41 @@
-version: "3.8"
 services:
-mongodb:
-image : mongo
-container_name: mongodb
-environment:
-- PUID=1000
-- PGID=1000
+  geth:
+    build: ./go-ethereum/
+    volumes:
+      - bc:/bc
+    networks:
+      - BCNetwork
+  bdd:
+    image: mongo
+    volumes:
+      - bdd:/bdd
+    networks:
+      - MyBridgedNetwork
+
 volumes:
-- /home/hugo/mongodb/database:/data/db
-ports:
-- 27017:27017
-restart: unless-stopped
+  bdd:
+  bc:
+
+networks:
+  MyBridgedNetwork:
+    driver: bridge
+  BCNetwork:
+    driver: bridge
+
+
+# version: "3.8"
+# services:
+# mongodb:
+# image : mongo
+# container_name: mongodb
+# environment:
+# - PUID=1000
+# - PGID=1000
+# volumes:
+# - /home/hugo/mongodb/database:/data/db
+# ports:
+# - 27017:27017
+# restart: unless-stopped
+
+
+
