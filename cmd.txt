@@ -1,0 +1,27 @@
+docker network create -d bridge --subnet=172.1.1.0/24 MyBridgedNetwork
+
+docker network connect MyBridgedNetwork Nginx
+
+
+docker run --name MyNginx -p 80:80 -d nginx
+
+
+docker network connect MyBridgedNetwork MyNginx
+
+
+
+
+
+docker run -p 27017:27017 -v /tmp/db/db --name MyMongo -d mongo
+
+
+
+docker volume create bdd
+
+ docker volume ls
+
+ docker run -d -it --network MyBridgedNetwork --mount source=bdd,destination=/bdd --name bdd mongo
+
+ docker ps
+
+ docker network create -d bridge --subnet=172.2.2.0/24 BCNetwork
