@@ -1,5 +1,4 @@
-docker network create -d bridge --subnet=172.1.1.0/24 MyBridgedNetwork
-
+#generation of a bridged network named MyBridgedNetwork with ip range 172.1.1.0/24
 docker network connect MyBridgedNetwork Nginx
 
 docker run --name MyNginx -p 80:80 -d nginx
